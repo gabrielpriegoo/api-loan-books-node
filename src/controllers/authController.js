@@ -1,7 +1,8 @@
 const { users } = require("../models/users");
-const { getUserByEmail, createUser } = require("./userController");
+const { getUserByEmail, createUser } = require("../services/userService");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const HttpError = require("../errors/HttpError");
 
 module.exports = {
   register: (req, res) => {
@@ -44,9 +45,7 @@ module.exports = {
   login: (req, res) => {
     const { email, password } = req.body;
     if (typeof email !== "string" || typeof password !== "string") {
-      return res
-        .status(400)
-        .json({ message: "Invalid input, fields must be strings" });
+      throw new HttpError(400, "Invalid input, fields must be strings");
     }
 
     // Check if user exists

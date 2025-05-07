@@ -1,17 +1,17 @@
 const express = require("express");
 const authController = require("../controllers/authController");
 const authMiddlewares = require("../middlewares/authMiddlewares");
-const router = express.Router();
+const authRouter = express.Router();
 
 // Define routes
-router.post("/auth/register", authController.register);
-router.post("/auth/login", authController.login);
+authRouter.post("/register", authController.register);
+authRouter.post("/login", authController.login);
 
-router.get("/user", authMiddlewares.ensureAuth, (req, res) => {
+authRouter.get("/user", authMiddlewares.ensureAuth, (req, res) => {
   res.status(200).json({
     message: "User authenticated",
     user: req.user,
   });
 });
 
-module.exports = router;
+module.exports = authRouter;

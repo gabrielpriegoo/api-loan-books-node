@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { getUserById } = require("../controllers/userController");
+const { getUserById } = require("../services/userService");
 
 module.exports = {
   ensureAuth: (req, res, next) => {
