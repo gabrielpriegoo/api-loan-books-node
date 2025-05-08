@@ -71,7 +71,8 @@ module.exports = {
     const { id } = req.params;
     const deletedBook = deleteBook(id);
     res.status(200).json({
-      message: `Book ${deletedBook.title} deleted`,
+      message: `Book deleted`,
+      deletedBook,
     });
   },
 };

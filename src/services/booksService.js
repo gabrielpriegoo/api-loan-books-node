@@ -34,7 +34,27 @@ module.exports = {
       throw new HttpError(404, "Book not found");
     }
     const deletedBook = books[bookIndex];
-    books = books.filter((book) => book.id !== id);
+    books.splice(bookIndex, 1);
     return deletedBook;
+  },
+
+  takeBook: (id) => {
+    const bookIndex = books.findIndex((book) => book.id === id);
+    if (bookIndex === -1) {
+      throw new HttpError(404, "Book not found");
+    }
+    const book = books[bookIndex];
+    book.quantity -= 1;
+    return book;
+  },
+
+  returnBook: (id) => {
+    const bookIndex = books.findIndex((book) => book.id === id);
+    if (bookIndex === -1) {
+      throw new HttpError(404, "Book not found");
+    }
+    const book = books[bookIndex];
+    book.quantity += 1;
+    return book;
   },
 };
